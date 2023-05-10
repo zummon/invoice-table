@@ -1,5 +1,4 @@
 <script>
-
 	import { onMount } from "svelte";
 
 	export let data;
@@ -103,64 +102,88 @@
 	</div>
 </div>
 
-<div class="">
-    <table class="table-auto w-full">
-        <thead class="text-center">
+<div class="container print:container-none mx-auto print:mx-0">
+    <table class="w-full">
+        <thead class="">
 			<tr class="">
-				<td class="" colspan="6" contenteditable="true" bind:textContent={q['vendorName']}></td>
+				<td class="text-center border-t border-x border-black" colspan="6" contenteditable="true" bind:textContent={q['vendorName']}></td>
 			</tr>
 			<tr class="">
-				<td class="" colspan="6" contenteditable="true" bind:textContent={q['vendorId']}></td>
+				<td class="text-center border-x border-black" colspan="6" contenteditable="true" bind:textContent={q['vendorid']}></td>
 			</tr>
 			<tr class="">
-				<td class="" colspan="6" contenteditable="true" bind:textContent={q['vendorAddress']}></td>
+				<td class="text-center border-b border-x border-black" colspan="6" contenteditable="true" bind:textContent={q['vendorAddress']}></td>
 			</tr>
             <tr class="">
-                <th class="font-bold" colspan="6">{l['title']}</th>
+                <td class="text-center font-bold border border-black px-2 py-2" colspan="6">{l['title']}</td>
             </tr>
+			<tr class="">
+				<td class="border-t border-x border-black px-2 pt-1" colspan="3">
+					<span class="">{l['client']}</span>: <span class="" contenteditable="true" bind:textContent={q['clientName']}></span>
+				</td>
+				<td class="border-t border-x border-black px-2 pt-1" colspan="3">
+					<span class="">{l['date']}</span>
+				</td>
+			</tr>
+			<tr class="">
+				<td class="border-x border-black px-2" colspan="3" contenteditable="true" bind:textContent={q['clientAddress']}></td>
+				<td class="border-x border-black px-2" colspan="3">
+					<span class="">{l['ref']}</span>
+				</td>
+			</tr>
+			<tr class="">
+				<td class="border-b border-x border-black px-2 pb-1" colspan="3">
+					<span class="">{l['clientid']}</span> <span class="" contenteditable="true" bind:textContent={q['clientid']}></span>
+				</td>
+				<td class="border-b border-x border-black px-2 pb-1" colspan="3">
+					<span class="">{l['date']}</span>
+				</td>
+			</tr>
 			<tr class="text-center">
-                <td class="">{l['itemNo']}</td>
-                <td class="">{l['itemDesc']}</td>
-                <td class=""></td>
-                <td class="">{l['itemQty']}</td>
-                <td class="">{l['itemPrice']}</td>
-                <td class="">{l['itemAmount']}</td>
+                <th class="border border-black px-2 py-1">{l['itemNo']}</th>
+                <th class="border border-black px-2 py-1">{l['itemDesc']}</th>
+                <th class="border border-black px-2 py-1">{l['itemUnit']}</th>
+                <th class="border border-black px-2 py-1">{l['itemQty']}</th>
+                <th class="border border-black px-2 py-1">{l['itemPrice']}</th>
+                <th class="border border-black px-2 py-1">
+					<span class="">{l['itemAmount']}</span>
+					(<span class="" contenteditable="true" bind:textContent={q['currency']}></span>)
+				</th>
             </tr>
         </thead>
         <tbody class="">
-            <tr class="">
-                <td class=""></td>
-                <td class=""></td>
-                <td class=""></td>
-                <td class=""></td>
-                <td class=""></td>
-                <td class=""></td>
-            </tr>
+			{#each q['itemDesc'] as _, index (`item-${index}`)}
+				<tr class="">
+					<td class="border border-black text-center px-2 py-1" contenteditable="true">{index + 1}</td>
+					<td class="border border-black px-2 py-1" contenteditable="true" bind:textContent={q['itemDesc'][index]}></td>
+					<td class="border border-black text-center px-2 py-1" contenteditable="true"></td>
+					<td class="border border-black text-center px-2 py-1" contenteditable="true" bind:textContent={q['itemQty'][index]}></td>
+					<td class="border border-black text-right px-2 py-1" contenteditable="true" bind:textContent={q['itemPrice'][index]}></td>
+					<td class="border border-black text-right px-2 py-1">{q['itemAmount'][index]}</td>
+				</tr>
+			{/each}
         </tbody>
 		<tfoot class="">
 			<tr class="">
-				<td class=""></td>
-				<td class=""></td>
-				<td class=""></td>
-				<td class=""></td>
-				<td class="">{l['totalAmount']}</td>
-				<td class=""></td>
+				<td class="border border-black" colspan="4"></td>
+				<td class="border border-black text-center px-2 py-1 font-bold">{l['totalAmount']}</td>
+				<td class="border border-black text-right px-2 py-1 font-bold" contenteditable="true" bind:textContent={q['totalAmount']}></td>
 			</tr>
-			<tr class="">
+			<!-- <tr class="">
 				<td class=""></td>
 				<td class=""></td>
 				<td class=""></td>
 				<td class=""></td>
 				<td class=""></td>
 				<td class=""></td>
+			</tr> -->
+			<tr class="text-center">
+				<td class="border border-black" colspan="3" contenteditable="true"><br><br></td>
+				<td class="border border-black" colspan="3" contenteditable="true"><br><br></td>
 			</tr>
 			<tr class="text-center">
-				<td class="" colspan="3" contenteditable="true"></td>
-				<td class="" colspan="3" contenteditable="true"></td>
-			</tr>
-			<tr class="text-center">
-				<td class="" colspan="3">{l['vendorSign']}</td>
-				<td class="" colspan="3">{l['clientSign']}</td>
+				<td class="border border-black" colspan="3">{l['vendorSign']}</td>
+				<td class="border border-black" colspan="3">{l['clientSign']}</td>
 			</tr>
 		</tfoot>
     </table>
