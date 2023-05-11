@@ -13,7 +13,6 @@
 	  }
 	  return number.toLocaleString(undefined, {
 	    minimumFractionDigits: 2,
-	    maximumFractionDigits: 2
 	  });
 	};
 	const qty = number => {
@@ -21,7 +20,9 @@
 	  if (number === 0 || isNaN(number)) {
 	    return "";
 	  }
-	  return number;
+	  return number.toLocaleString(undefined, {
+	    minimumFractionDigits: 0,
+	  });
 	};
 	const rate = rate => {
 	  rate = Number(rate) * 100;
@@ -32,8 +33,8 @@
 	};
 	const addItem = () => {
 	  q.itemDesc.push("");
-	  q.itemPrice.push("");
-	  q.itemQty.push("");
+	  q.itemPrice.push('');
+	  q.itemQty.push('');
 	  q = q;
 	};
 	const removeItem = () => {
@@ -63,8 +64,8 @@
 	  ...data[q.lang].label[""],
 	  ...data[q.lang].label[q.doc]
 	};
-	$: q.itemAmount = q.itemPrice.map((pr, i) => {
-	  const num = Number(pr) * Number(q.itemQty[i]);
+	$: q.itemAmount = q.itemPrice.map((pr, index) => {
+	  const num = Number(pr) * Number(q.itemQty[index]);
 	  return num ? num : "";
 	});
 	$: q.totalAmount = q.itemAmount.reduce((a, b) => {
@@ -83,7 +84,7 @@
 
 <div class="flex flex-wrap justify-center items-center my-4 print:hidden">
 	<div class="">
-		{#each Object.keys(data) as lng, i (`lang-${i}`)}
+		{#each Object.keys(data) as lng, index (`lang-${index}`)}
 			<button class="p-3 font-bold {q.lang === lng ? "text-indigo-500" : "text-sky-500 underline"}" on:click={() => {
 				q.lang = lng
 			}}>
@@ -92,7 +93,7 @@
 		{/each}
 	</div>
 	<div class="">
-		{#each Object.keys(data[q.lang].label) as dc, i (`doc-${i}`)}
+		{#each Object.keys(data[q.lang].label) as dc, index (`doc-${index}`)}
 			<button class="p-3 font-bold {q.doc === dc ? "text-indigo-500" : "text-sky-500 underline"}" on:click={() => {
 				q.doc = dc
 			}}>
@@ -135,9 +136,7 @@
 				<td class="border-b border-x border-black px-2 pb-1" colspan="3">
 					<span class="">{l['clientid']}</span> <span class="" contenteditable="true" bind:textContent={q['clientid']}></span>
 				</td>
-				<td class="border-b border-x border-black px-2 pb-1" colspan="3">
-					
-				</td>
+				<td class="border-b border-x border-black px-2 pb-1" colspan="3"></td>
 			</tr>
 			<tr class="text-center">
                 <th class="border border-black px-2 py-1">{l['itemNo']}</th>
@@ -163,9 +162,21 @@
 					<td class="border border-black text-center px-2 py-1" contenteditable="true">{index + 1}</td>
 					<td class="border border-black px-2 py-1" contenteditable="true" bind:textContent={q['itemDesc'][index]}></td>
 					<td class="border border-black text-center px-2 py-1" contenteditable="true"></td>
-					<td class="border border-black text-center px-2 py-1" contenteditable="true" bind:textContent={q['itemQty'][index]}></td>
-					<td class="border border-black text-right px-2 py-1" contenteditable="true" bind:textContent={q['itemPrice'][index]}></td>
-					<td class="border border-black text-right px-2 py-1">{q['itemAmount'][index]}</td>
+					<td class="border border-black text-center px-2 py-1" contenteditable="true" 
+						on:focus={(e) => e.target.textContent = q['itemQty'][index]}
+						on:input={(e) => q['itemQty'][index] = e.target.textContent}
+						on:blur={(e) => e.target.textContent = qty(q['itemQty'][index])}
+					>
+						{qty(q['itemQty'][index])}
+					</td>
+					<td class="border border-black text-right px-2 py-1" contenteditable="true" 
+						on:focus={(e) => e.target.textContent = q['itemPrice'][index]}
+						on:input={(e) => q['itemPrice'][index] = e.target.textContent}
+						on:blur={(e) => e.target.textContent = price(q['itemPrice'][index])}
+					>
+						{price(q['itemPrice'][index])}
+					</td>
+					<td class="border border-black text-right px-2 py-1">{price(q['itemAmount'][index])}</td>
 				</tr>
 			{/each}
         </tbody>
@@ -173,7 +184,9 @@
 			<tr class="">
 				<td class="border border-black" colspan="4"></td>
 				<td class="border border-black text-center px-2 py-1 font-bold">{l['totalAmount']}</td>
-				<td class="border border-black text-right px-2 py-1 font-bold" contenteditable="true" bind:textContent={q['totalAmount']}></td>
+				<td class="border border-black text-right px-2 py-1 font-bold" contenteditable="true">
+					{price(q['totalAmount'])}
+				</td>
 			</tr>
 			<!-- <tr class="">
 				<td class=""></td>
