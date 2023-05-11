@@ -11,10 +11,10 @@
 	  if (number === 0 || isNaN(number)) {
 	    return "";
 	  }
-	  return `${q.currency} ${number.toLocaleString(undefined, {
+	  return number.toLocaleString(undefined, {
 	    minimumFractionDigits: 2,
 	    maximumFractionDigits: 2
-	  })}`;
+	  });
 	};
 	const qty = number => {
 	  number = Number(number);
@@ -122,13 +122,13 @@
 					<span class="">{l['client']}</span>: <span class="" contenteditable="true" bind:textContent={q['clientName']}></span>
 				</td>
 				<td class="border-t border-x border-black px-2 pt-1" colspan="3">
-					<span class="">{l['date']}</span>
+					<span class="">{l['date']}</span>: <span class="" contenteditable="true" bind:textContent={q['date']}></span>
 				</td>
 			</tr>
 			<tr class="">
 				<td class="border-x border-black px-2" colspan="3" contenteditable="true" bind:textContent={q['clientAddress']}></td>
 				<td class="border-x border-black px-2" colspan="3">
-					<span class="">{l['ref']}</span>
+					<span class="">{l['ref']}</span>: <span class="" contenteditable="true" bind:textContent={q['ref']}></span>
 				</td>
 			</tr>
 			<tr class="">
@@ -136,12 +136,18 @@
 					<span class="">{l['clientid']}</span> <span class="" contenteditable="true" bind:textContent={q['clientid']}></span>
 				</td>
 				<td class="border-b border-x border-black px-2 pb-1" colspan="3">
-					<span class="">{l['date']}</span>
+					
 				</td>
 			</tr>
 			<tr class="text-center">
                 <th class="border border-black px-2 py-1">{l['itemNo']}</th>
-                <th class="border border-black px-2 py-1">{l['itemDesc']}</th>
+                <th class="border border-black px-2 py-1">
+					<span class="">{l['itemDesc']}</span>
+					<span class="print:hidden absolute z-10 text-3xl font-bold text-sky-500">
+						<button class="" on:click={addItem}>+</button>
+						<button class="" on:click={removeItem}>-</button>
+					</span>
+				</th>
                 <th class="border border-black px-2 py-1">{l['itemUnit']}</th>
                 <th class="border border-black px-2 py-1">{l['itemQty']}</th>
                 <th class="border border-black px-2 py-1">{l['itemPrice']}</th>
@@ -191,7 +197,7 @@
 
 
 <div class="flex flex-wrap justify-center items-center my-4 print:hidden">
-	<button class="p-3 font-bold text-sky-500 underline" on:click={() => window.print()}>
+	<button class="p-3 font-bold text-sky-500 underline" on:click={() => {window.print()}}>
 		Print
 	</button>
 </div>
