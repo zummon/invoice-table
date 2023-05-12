@@ -184,7 +184,7 @@
 			<tr class="">
 				<td class="border border-black" colspan="4"></td>
 				<td class="border border-black text-center px-2 py-1 font-bold">{l.totalAmount}</td>
-				<td class="border border-black text-right px-2 py-1 font-bold" contenteditable="true">
+				<td class="border border-black text-right px-2 py-1 font-bold">
 					{price(q.totalAmount)}
 				</td>
 			</tr>
