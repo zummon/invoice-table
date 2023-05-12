@@ -107,85 +107,85 @@
     <table class="w-full">
         <thead class="">
 			<tr class="">
-				<td class="text-center border-t border-x border-black" colspan="6" contenteditable="true" bind:textContent={q['vendorName']}></td>
+				<td class="text-center border-t border-x border-black" colspan="6" contenteditable="true" bind:textContent={q.vendorName}></td>
 			</tr>
 			<tr class="">
-				<td class="text-center border-x border-black" colspan="6" contenteditable="true" bind:textContent={q['vendorid']}></td>
+				<td class="text-center border-x border-black" colspan="6" contenteditable="true" bind:textContent={q.vendorid}></td>
 			</tr>
 			<tr class="">
-				<td class="text-center border-b border-x border-black" colspan="6" contenteditable="true" bind:textContent={q['vendorAddress']}></td>
+				<td class="text-center border-b border-x border-black" colspan="6" contenteditable="true" bind:textContent={q.vendorAddress}></td>
 			</tr>
             <tr class="">
-                <td class="text-center font-bold border border-black px-2 py-2" colspan="6">{l['title']}</td>
+                <td class="text-center font-bold border border-black px-2 py-2" colspan="6">{l.title}</td>
             </tr>
 			<tr class="">
 				<td class="border-t border-x border-black px-2 pt-1" colspan="3">
-					<span class="">{l['client']}</span>: <span class="" contenteditable="true" bind:textContent={q['clientName']}></span>
+					<span class="">{l.client}</span>: <span class="" contenteditable="true" bind:textContent={q.clientName}></span>
 				</td>
 				<td class="border-t border-x border-black px-2 pt-1" colspan="3">
-					<span class="">{l['date']}</span>: <span class="" contenteditable="true" bind:textContent={q['date']}></span>
+					<span class="">{l.date}</span>: <span class="" contenteditable="true" bind:textContent={q.date}></span>
 				</td>
 			</tr>
 			<tr class="">
-				<td class="border-x border-black px-2" colspan="3" contenteditable="true" bind:textContent={q['clientAddress']}></td>
+				<td class="border-x border-black px-2" colspan="3" contenteditable="true" bind:textContent={q.clientAddress}></td>
 				<td class="border-x border-black px-2" colspan="3">
-					<span class="">{l['ref']}</span>: <span class="" contenteditable="true" bind:textContent={q['ref']}></span>
+					<span class="">{l.ref}</span>: <span class="" contenteditable="true" bind:textContent={q.ref}></span>
 				</td>
 			</tr>
 			<tr class="">
 				<td class="border-b border-x border-black px-2 pb-1" colspan="3">
-					<span class="">{l['clientid']}</span> <span class="" contenteditable="true" bind:textContent={q['clientid']}></span>
+					<span class="">{l.clientid}</span> <span class="" contenteditable="true" bind:textContent={q.clientid}></span>
 				</td>
 				<td class="border-b border-x border-black px-2 pb-1" colspan="3"></td>
 			</tr>
 			<tr class="text-center">
-                <th class="border border-black px-2 py-1">{l['itemNo']}</th>
+                <th class="border border-black px-2 py-1">{l.itemNo}</th>
                 <th class="border border-black px-2 py-1">
-					<span class="">{l['itemDesc']}</span>
+					<span class="">{l.itemDesc}</span>
 					<span class="print:hidden absolute z-10 text-3xl font-bold text-sky-500">
 						<button class="" on:click={addItem}>+</button>
 						<button class="" on:click={removeItem}>-</button>
 					</span>
 				</th>
-                <th class="border border-black px-2 py-1">{l['itemUnit']}</th>
-                <th class="border border-black px-2 py-1">{l['itemQty']}</th>
-                <th class="border border-black px-2 py-1">{l['itemPrice']}</th>
+                <th class="border border-black px-2 py-1">{l.itemUnit}</th>
+                <th class="border border-black px-2 py-1">{l.itemQty}</th>
+                <th class="border border-black px-2 py-1">{l.itemPrice}</th>
                 <th class="border border-black px-2 py-1">
-					<span class="">{l['itemAmount']}</span>
-					(<span class="" contenteditable="true" bind:textContent={q['currency']}></span>)
+					<span class="">{l.itemAmount}</span>
+					(<span class="" contenteditable="true" bind:textContent={q.currency}></span>)
 				</th>
             </tr>
         </thead>
         <tbody class="">
-			{#each q['itemDesc'] as _, index (`item-${index}`)}
+			{#each q.itemDesc as _, index (`item-${index}`)}
 				<tr class="">
 					<td class="border border-black text-center px-2 py-1" contenteditable="true">{index + 1}</td>
-					<td class="border border-black px-2 py-1" contenteditable="true" bind:textContent={q['itemDesc'][index]}></td>
+					<td class="border border-black px-2 py-1" contenteditable="true" bind:textContent={q.itemDesc[index]}></td>
 					<td class="border border-black text-center px-2 py-1" contenteditable="true"></td>
 					<td class="border border-black text-center px-2 py-1" contenteditable="true" 
-						on:focus={(e) => e.target.textContent = q['itemQty'][index]}
-						on:input={(e) => q['itemQty'][index] = e.target.textContent}
-						on:blur={(e) => e.target.textContent = qty(q['itemQty'][index])}
+						on:focus={(e) => e.target.textContent = q.itemQty[index]}
+						on:input={(e) => q.itemQty[index] = e.target.textContent}
+						on:blur={(e) => e.target.textContent = qty(q.itemQty[index])}
 					>
-						{qty(q['itemQty'][index])}
+						{qty(q.itemQty[index])}
 					</td>
 					<td class="border border-black text-right px-2 py-1" contenteditable="true" 
-						on:focus={(e) => e.target.textContent = q['itemPrice'][index]}
-						on:input={(e) => q['itemPrice'][index] = e.target.textContent}
-						on:blur={(e) => e.target.textContent = price(q['itemPrice'][index])}
+						on:focus={(e) => e.target.textContent = q.itemPrice[index]}
+						on:input={(e) => q.itemPrice[index] = e.target.textContent}
+						on:blur={(e) => e.target.textContent = price(q.itemPrice[index])}
 					>
-						{price(q['itemPrice'][index])}
+						{price(q.itemPrice[index])}
 					</td>
-					<td class="border border-black text-right px-2 py-1">{price(q['itemAmount'][index])}</td>
+					<td class="border border-black text-right px-2 py-1">{price(q.itemAmount[index])}</td>
 				</tr>
 			{/each}
         </tbody>
 		<tfoot class="">
 			<tr class="">
 				<td class="border border-black" colspan="4"></td>
-				<td class="border border-black text-center px-2 py-1 font-bold">{l['totalAmount']}</td>
+				<td class="border border-black text-center px-2 py-1 font-bold">{l.totalAmount}</td>
 				<td class="border border-black text-right px-2 py-1 font-bold" contenteditable="true">
-					{price(q['totalAmount'])}
+					{price(q.totalAmount)}
 				</td>
 			</tr>
 			<!-- <tr class="">
@@ -201,8 +201,8 @@
 				<td class="border border-black" colspan="3" contenteditable="true"><br><br></td>
 			</tr>
 			<tr class="text-center">
-				<td class="border border-black" colspan="3">{l['vendorSign']}</td>
-				<td class="border border-black" colspan="3">{l['clientSign']}</td>
+				<td class="border border-black" colspan="3">{l.vendorSign}</td>
+				<td class="border border-black" colspan="3">{l.clientSign}</td>
 			</tr>
 		</tfoot>
     </table>
