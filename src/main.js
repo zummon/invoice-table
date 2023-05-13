@@ -61,11 +61,14 @@ let data = {
       itemDesc: ["", "", "", "", ""],
       itemPrice: ["", "", "", "", ""],
       itemQty: ["", "", "", "", ""],
+      itemUnit: ["", "", "", "", ""],
       vatRate: "0.05",
       whtRate: "0",
       totalAdjust: "",
       note: "",
     },
+    itemsDesc: [],
+    itemsUnit: []
   },
   th: {
     "": "ภาษาไทย",
@@ -114,7 +117,7 @@ let data = {
       currency: "บาท",
       vendorLogo: "",
       ref: Math.random().toString().slice(2, 8),
-      date: new Date().toLocaleDateString("th"),
+      date: new Date().toLocaleDateString("th",{ year: 'numeric', month: 'long', day: 'numeric' }),
       duedate: "...",
       vendorName: "ชื่อผู้ขาย",
       vendorid: "เลขประจำตัว",
@@ -126,11 +129,26 @@ let data = {
       itemDesc: ["", "", "", "", ""],
       itemPrice: ["", "", "", "", ""],
       itemQty: ["", "", "", "", ""],
+      itemUnit: ["", "", "", "", ""],
       vatRate: "0.07",
       whtRate: "0",
       totalAdjust: "",
       note: "",
     },
+    itemsDesc: [
+      'บล็อก/กระเบื้องคอนกรีต ติดตั้งบนทราย (ไม่รวมทราย)',
+      'กระเบื้องคอนกรีต ติดตั้งบนคอนกรีต (รวมปูนทราย 3 ซม.)',
+      'ขอบคันหินใหญ่ พร้อมติดตั้ง',
+      'ขอบคันหินเล็ก พร้อมติดตั้ง',
+      'ขอบคันหินตกแต่ง พร้อมติดตั้ง',
+      'LXP LS ค่าบ่อพัก',
+      'LXP LS ค่าน้ำยาประสานทราย',
+    ],
+    itemsUnit: [
+      'เมตร',
+      'บ่อ',
+      'ตร.ม.',
+    ]
   },
 };
 

@@ -1,6 +1,5 @@
 <script>
 	import { onMount } from "svelte";
-
 	export let data;
 
 	let l = data[""].label[""];
@@ -32,7 +31,7 @@
 	  return `${rate} %`;
 	};
 	const addItem = () => {
-	  q.itemDesc.push("");
+	  q.itemDesc.push('');
 	  q.itemPrice.push('');
 	  q.itemQty.push('');
 	  q = q;
@@ -80,7 +79,6 @@
 	  Number(q.totalWht) +
 	  Number(q.totalAdjust);
 </script>
-
 
 <div class="flex flex-wrap justify-center items-center my-4 print:hidden">
 	<div class="">
@@ -140,12 +138,8 @@
 			</tr>
 			<tr class="text-center">
                 <th class="border border-black px-2 py-1">{l.itemNo}</th>
-                <th class="border border-black px-2 py-1">
+                <th class="border border-black px-2 py-1 relative">
 					<span class="">{l.itemDesc}</span>
-					<span class="print:hidden absolute z-10 text-3xl font-bold text-sky-500">
-						<button class="" on:click={addItem}>+</button>
-						<button class="" on:click={removeItem}>-</button>
-					</span>
 				</th>
                 <th class="border border-black px-2 py-1">{l.itemUnit}</th>
                 <th class="border border-black px-2 py-1">{l.itemQty}</th>
@@ -161,7 +155,7 @@
 				<tr class="">
 					<td class="border border-black text-center px-2 py-1" contenteditable="true">{index + 1}</td>
 					<td class="border border-black px-2 py-1" contenteditable="true" bind:textContent={q.itemDesc[index]}></td>
-					<td class="border border-black text-center px-2 py-1" contenteditable="true"></td>
+					<td class="border border-black text-center px-2 py-1" contenteditable="true" bind:textContent={q.itemUnit[index]}></td>
 					<td class="border border-black text-center px-2 py-1" contenteditable="true" 
 						on:focus={(e) => e.target.textContent = q.itemQty[index]}
 						on:input={(e) => q.itemQty[index] = e.target.textContent}
@@ -179,6 +173,13 @@
 					<td class="border border-black text-right px-2 py-1">{price(q.itemAmount[index])}</td>
 				</tr>
 			{/each}
+			<tr class="print:hidden">
+				<td class="text-center" colspan="6">
+					<button class="text-3xl font-bold text-sky-500" on:click={addItem}>+</button>
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					<button class="text-3xl font-bold text-sky-500" on:click={removeItem}>-</button>
+				</td>
+			</tr>
         </tbody>
 		<tfoot class="">
 			<tr class="">
@@ -208,10 +209,36 @@
     </table>
 </div>
 
-
-<div class="flex flex-wrap justify-center items-center my-4 print:hidden">
+<div class="flex flex-wrap justify-center items-center my-4 print:hidden gap-4">
+	<select class="" multiple on:change={(event) => {
+		const value = event.target.value
+		let items = q.itemDesc.slice()
+		for (let index = 0; index < items.length; index++) {
+			if (items[index] == '') {
+				q.itemDesc[index] = value
+				break
+			}
+		}
+	}}>
+		{#each data[q.lang].itemsDesc as item,index (`desc-list-${index}`)}
+			<option class="" value={item}>{item}</option>
+		{/each}
+	</select>
+	<select class="" multiple on:change={(event) => {
+		const value = event.target.value
+		let items = q.itemUnit.slice()
+		for (let index = 0; index < items.length; index++) {
+			if (items[index] == '') {
+				q.itemUnit[index] = value
+				break
+			}
+		}
+	}}>
+		{#each data[q.lang].itemsUnit as item,index (`unit-list-${index}`)}
+			<option class="" value={item}>{item}</option>
+		{/each}
+	</select>
 	<button class="p-3 font-bold text-sky-500 underline" on:click={() => {window.print()}}>
 		Print
 	</button>
 </div>
-
