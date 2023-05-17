@@ -57,6 +57,9 @@
 	    }
 	  });
 	  q = { ...data[q.lang].q, ...obj };
+	  
+	//   const searchParams = new URLSearchParams(location.search)
+	  
 	});
 
 	$: l = {
