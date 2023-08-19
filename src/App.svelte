@@ -85,7 +85,7 @@
 	<div class="">
 		{#each Object.keys(data) as lng, index (`lang-${index}`)}
 			<button class="p-3 font-bold {q.lang === lng ? "text-indigo-500" : "text-sky-500 underline"}" on:click={() => {
-				q.lang = lng
+				q = data[lng].q
 			}}>
 				{data[lng]['']}
 			</button>
@@ -291,7 +291,7 @@
 </div>
 
 <div class="flex flex-wrap justify-center items-center my-4 print:hidden gap-4">
-	<button class="p-3 font-bold text-sky-500 underline" on:click={() => {window.print()}}>
+	<button class="p-3 font-bold text-sky-500 underline" on:click={() => {print()}}>
 		Print
 	</button>
 </div>
