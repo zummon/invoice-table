@@ -177,22 +177,26 @@
 			<tr class="print:hidden">
 				<td class="text-center"></td>
 				<td class="text-center">
-					{#each data[q.lang].itemsDesc as item, index (`desc-list-${index}`)}
-						<button class="inline text-sky-500 font-medium" on:click={(event) => {
-							let items = q.itemDesc.slice()
-							for (let index = 0; index < items.length; index++) {
-								if (items[index] == '') {
-									q.itemDesc[index] = item
-									break
-								}
-							}
-						}}>
-							{item}
-						</button>
-					{/each}
+					<ul class="space-y-2">
+						{#each data[q.lang].itemsDesc as item, index (`desc-list-${index}`)}
+							<li class="">
+								<button class="text-sky-500 font-medium" on:click={(event) => {
+									let items = q.itemDesc.slice()
+									for (let index = 0; index < items.length; index++) {
+										if (items[index] == '') {
+											q.itemDesc[index] = item
+											break
+										}
+									}
+								}}>
+									{item}
+								</button>
+							</li>
+						{/each}
+					</ul>
 				</td>
 				<td class="text-center">
-					<ul class="">
+					<ul class="space-y-2">
 						{#each data[q.lang].itemsUnit as item, index (`unit-list-${index}`)}
 							<li class="">
 								<button class="text-sky-500 font-medium" on:click={(event) => {
