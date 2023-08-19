@@ -192,19 +192,23 @@
 					{/each}
 				</td>
 				<td class="text-center">
-					{#each data[q.lang].itemsUnit as item, index (`unit-list-${index}`)}
-						<button class="inline text-sky-500 font-medium" on:click={(event) => {
-							let items = q.itemUnit.slice()
-							for (let index = 0; index < items.length; index++) {
-								if (items[index] == '') {
-									q.itemUnit[index] = item
-									break
-								}
-							}
-						}}>
-							{item}
-						</button>
-					{/each}
+					<ul class="">
+						{#each data[q.lang].itemsUnit as item, index (`unit-list-${index}`)}
+							<li class="">
+								<button class="text-sky-500 font-medium" on:click={(event) => {
+									let items = q.itemUnit.slice()
+									for (let index = 0; index < items.length; index++) {
+										if (items[index] == '') {
+											q.itemUnit[index] = item
+											break
+										}
+									}
+								}}>
+									{item}
+								</button>
+							</li>
+						{/each}
+					</ul>
 				</td>
 				<td class="text-center"></td>
 				<td class="text-center"></td>
