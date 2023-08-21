@@ -1,6 +1,6 @@
 <script>
 	import { onMount } from "svelte";
-	export let data;
+	import data from "./data.json";
 
 	let l = data[""].label[""];
 	let q = data[""].q;
@@ -81,6 +81,17 @@
 		Number(q.totalAdjust);
 </script>
 
+<datalist id="desc-li">
+	{#each data[q.lang].itemsDesc as item, index (`desc-li-${index}`)}
+		<option value={item}>{item}</option>
+	{/each}
+</datalist>
+<datalist id="unit-li">
+	{#each data[q.lang].itemsUnit as item, index (`unit-li-${index}`)}
+		<option value={item}>{item}</option>
+	{/each}
+</datalist>
+
 <div class="flex flex-wrap justify-center items-center my-4 print:hidden">
 	<div class="">
 		{#each Object.keys(data) as lng, index (`lang-${index}`)}
@@ -155,8 +166,14 @@
 			{#each q.itemDesc as _, index (`item-${index}`)}
 				<tr class="">
 					<td class="border border-black text-center px-2 py-1" contenteditable="true">{index + 1}</td>
-					<td class="border border-black px-2 py-1" contenteditable="true" bind:textContent={q.itemDesc[index]}></td>
-					<td class="border border-black text-center px-2 py-1" contenteditable="true" bind:textContent={q.itemUnit[index]}></td>
+					<td class="border border-black px-2 py-1" >
+						<span class="hidden print:inline">{q.itemDesc[index]}</span>
+						<input class="print:hidden" type="text" bind:value={q.itemDesc[index]} list="desc-li" />
+					</td>
+					<td class="border border-black text-center px-2 py-1">
+						<span class="hidden print:inline">{q.itemUnit[index]}</span>
+						<input class="print:hidden w-12" type="text" bind:value={q.itemUnit[index]} list="unit-li" />
+					</td>
 					<td class="border border-black text-center px-2 py-1" contenteditable="true" 
 						on:focus={(e) => {e.target.textContent = q.itemQty[index]}}
 						on:input={(e) => {q.itemQty[index] = e.target.textContent}}
@@ -177,49 +194,13 @@
 			<tr class="print:hidden">
 				<td class="text-center"></td>
 				<td class="text-center">
-					<ul class="space-y-2">
-						{#each data[q.lang].itemsDesc as item, index (`desc-list-${index}`)}
-							<li class="">
-								<button class="text-sky-500 font-medium" on:click={(event) => {
-									let items = q.itemDesc.slice()
-									for (let index = 0; index < items.length; index++) {
-										if (items[index] == '') {
-											q.itemDesc[index] = item
-											break
-										}
-									}
-								}}>
-									{item}
-								</button>
-							</li>
-						{/each}
-					</ul>
-				</td>
-				<td class="text-center">
-					<ul class="space-y-2">
-						{#each data[q.lang].itemsUnit as item, index (`unit-list-${index}`)}
-							<li class="">
-								<button class="text-sky-500 font-medium" on:click={(event) => {
-									let items = q.itemUnit.slice()
-									for (let index = 0; index < items.length; index++) {
-										if (items[index] == '') {
-											q.itemUnit[index] = item
-											break
-										}
-									}
-								}}>
-									{item}
-								</button>
-							</li>
-						{/each}
-					</ul>
-				</td>
-				<td class="text-center"></td>
-				<td class="text-center"></td>
-				<td class="text-center">
 					<button class="text-4xl font-bold text-sky-500 p-2" on:click={addItem}>+</button>
 					<button class="text-4xl font-bold text-sky-500 p-2" on:click={removeItem}>-</button>
 				</td>
+				<td class="text-center"></td>
+				<td class="text-center"></td>
+				<td class="text-center"></td>
+				<td class="text-center"></td>
 			</tr>
 		</tbody>
 		<tfoot class="">
