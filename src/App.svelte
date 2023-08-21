@@ -174,45 +174,30 @@
 						<span class="hidden print:inline">{q.itemUnit[index]}</span>
 						<input class="print:hidden w-12" type="text" bind:value={q.itemUnit[index]} list="unit-li" />
 					</td>
-					<td class="border border-black text-center px-2 py-1" contenteditable="true" 
-						on:focus={(e) => {e.target.textContent = q.itemQty[index]}}
-						on:input={(e) => {q.itemQty[index] = e.target.textContent}}
-						on:blur={(e) => {e.target.textContent = qty(q.itemQty[index])}}
-					>
-						{qty(q.itemQty[index])}
+					<td class="border border-black text-center px-2 py-1" >
+						<span class="hidden print:inline">{qty(q.itemQty[index])}</span>
+						<input class="print:hidden w-12" type="number" bind:value={q.itemQty[index]} />
 					</td>
-					<td class="border border-black text-right px-2 py-1" contenteditable="true" 
-						on:focus={(e) => {e.target.textContent = q.itemPrice[index]}}
-						on:input={(e) => {q.itemPrice[index] = e.target.textContent}}
-						on:blur={(e) => {e.target.textContent = price(q.itemPrice[index])}}
-					>
-						{price(q.itemPrice[index])}
+					<td class="border border-black text-right px-2 py-1" >
+						<span class="hidden print:inline">{price(q.itemPrice[index])}</span>
+						<input class="print:hidden w-12" type="number" bind:value={q.itemPrice[index]} />
 					</td>
 					<td class="border border-black text-right px-2 py-1">{price(q.itemAmount[index])}</td>
 				</tr>
 			{/each}
-			<tr class="print:hidden">
-				<td class="text-center"></td>
-				<td class="text-center">
-					<button class="text-4xl font-bold text-sky-500 p-2" on:click={addItem}>+</button>
-					<button class="text-4xl font-bold text-sky-500 p-2" on:click={removeItem}>-</button>
-				</td>
-				<td class="text-center"></td>
-				<td class="text-center"></td>
-				<td class="text-center"></td>
-				<td class="text-center"></td>
-			</tr>
 		</tbody>
 		<tfoot class="">
 			<tr class="">
-				<td class="border-l border-t border-black" colspan="3"></td>
+				<td class="border-l border-t border-black text-center" colspan="3" rowspan={2}>
+					<button class="text-4xl font-bold text-sky-500 p-2" on:click={addItem}>+</button>
+					<button class="text-4xl font-bold text-sky-500 p-2" on:click={removeItem}>-</button>
+				</td>
 				<td class="border border-black text-center px-2 py-1 font-bold" colspan="2">{l.totalAmount}</td>
 				<td class="border border-black text-right px-2 py-1 font-bold">
 					{price(q.totalAmount)}
 				</td>
 			</tr>
 			<tr class="">
-				<td class="border-l border-black" colspan="3"></td>
 				<td class="border border-black text-center px-2 py-1 font-bold" colspan="2">
 					<span class="">{l.totalVat}</span>
 					<span class="" contenteditable="true" 
@@ -248,12 +233,10 @@
 			<tr class="">
 				<td class="border-l border-black" colspan="3"></td>
 				<td class="border border-black text-center px-2 py-1 font-bold" colspan="2">{l.totalAdjust}</td>
-				<td class="border border-black text-right px-2 py-1 font-bold" contenteditable="true" 
-					on:focus={(e) => {e.target.textContent = q.totalAdjust}}
-					on:input={(e) => {q.totalAdjust = e.target.textContent}}
-					on:blur={(e) => {e.target.textContent = price(q.totalAdjust)}}
-				>
+				<td class="border border-black text-right px-2 py-1 font-bold" >
 					{price(q.totalAdjust)}
+					<span class="hidden print:inline">{price(q.totalAdjust)}</span>
+					<input class="print:hidden w-12" type="number" bind:value={q.totalAdjust} />
 				</td>
 			</tr>
 			<tr class="">
