@@ -7,7 +7,7 @@
 
 	const price = number => {
 		number = Number(number);
-		if (number === 0 || isNaN(number)) {
+		if (number == 0 || isNaN(number)) {
 			return "";
 		}
 		return number.toLocaleString(undefined, {
@@ -16,7 +16,7 @@
 	};
 	const qty = number => {
 		number = Number(number);
-		if (number === 0 || isNaN(number)) {
+		if (number == 0 || isNaN(number)) {
 			return "";
 		}
 		return number.toLocaleString(undefined, {
@@ -42,6 +42,12 @@
 		q.itemQty.pop();
 		q = q;
 	};
+
+	// "ref": Math.random().toString().slice(2, 8),
+	// "date": new Date().toLocaleDateString(undefined),
+
+	// "ref": Math.random().toString().slice(2, 8),
+	// "date": new Date().toLocaleDateString("th",{ year: 'numeric', month: 'long', day: 'numeric' }),
 
 	onMount(() => {
 		const s = new URLSearchParams(location.search);
@@ -95,7 +101,7 @@
 <div class="flex flex-wrap justify-center items-center my-4 print:hidden">
 	<div class="">
 		{#each Object.keys(data) as lng, index (`lang-${index}`)}
-			<button class="p-3 font-bold {q.lang === lng ? "text-indigo-500" : "text-sky-500 underline"}" on:click={() => {
+			<button class="p-3 font-bold {q.lang == lng ? "text-indigo-500" : "text-sky-500 underline"}" on:click={() => {
 				q = data[lng].q
 			}}>
 				{data[lng]['']}
@@ -104,7 +110,7 @@
 	</div>
 	<div class="">
 		{#each Object.keys(data[q.lang].label) as dc, index (`doc-${index}`)}
-			<button class="p-3 font-bold {q.doc === dc ? "text-indigo-500" : "text-sky-500 underline"}" on:click={() => {
+			<button class="p-3 font-bold {q.doc == dc ? "text-indigo-500" : "text-sky-500 underline"}" on:click={() => {
 				q.doc = dc
 			}}>
 				{data[q.lang].label[dc].title}
@@ -189,8 +195,8 @@
 		<tfoot class="">
 			<tr class="">
 				<td class="border-l border-t border-black text-center" colspan="3" rowspan={2}>
-					<button class="text-4xl font-bold text-sky-500 p-2" on:click={addItem}>+</button>
-					<button class="text-4xl font-bold text-sky-500 p-2" on:click={removeItem}>-</button>
+					<button class="text-4xl font-bold text-sky-500 p-2 print:hidden" on:click={addItem}>+</button>
+					<button class="text-4xl font-bold text-sky-500 p-2 print:hidden" on:click={removeItem}>-</button>
 				</td>
 				<td class="border border-black text-center px-2 py-1 font-bold" colspan="2">{l.totalAmount}</td>
 				<td class="border border-black text-right px-2 py-1 font-bold">
@@ -200,30 +206,20 @@
 			<tr class="">
 				<td class="border border-black text-center px-2 py-1 font-bold" colspan="2">
 					<span class="">{l.totalVat}</span>
-					<span class="" contenteditable="true" 
-						on:focus={(e) => {e.target.textContent = q.vatRate}}
-						on:input={(e) => {q.vatRate = e.target.textContent}}
-						on:blur={(e) => {e.target.textContent = rate(q.vatRate)}}
-					>
-						{rate(q.vatRate)}
-					</span>
+					<span class="hidden print:inline">{rate(q.vatRate)}</span>
+					<input class="print:hidden w-12" type="number" bind:value={q.vatRate} step="0.01" />
 				</td>
 				<td class="border border-black text-right px-2 py-1 font-bold">
 					{price(q.totalVat)}
 				</td>
 			</tr>
-			{#if q.doc === 'receipt'}
+			{#if q.doc == 'receipt'}
 				<tr class="">
 					<td class="border-l border-black" colspan="3"></td>
 					<td class="border border-black text-center px-2 py-1 font-bold" colspan="2">
 						<span class="">{l.totalWht}</span>
-						<span class="" contenteditable="true" 
-							on:focus={(e) => {e.target.textContent = q.whtRate}}
-							on:input={(e) => {q.whtRate = e.target.textContent}}
-							on:blur={(e) => {e.target.textContent = rate(q.whtRate)}}
-						>
-							{rate(q.whtRate)}
-						</span>
+						<span class="hidden print:inline">{rate(q.whtRate)}</span>
+						<input class="print:hidden w-12" type="number" bind:value={q.whtRate} step="0.01" />
 					</td>
 					<td class="border border-black text-right px-2 py-1 font-bold">
 						{price(q.totalWht)}
@@ -234,7 +230,6 @@
 				<td class="border-l border-black" colspan="3"></td>
 				<td class="border border-black text-center px-2 py-1 font-bold" colspan="2">{l.totalAdjust}</td>
 				<td class="border border-black text-right px-2 py-1 font-bold" >
-					{price(q.totalAdjust)}
 					<span class="hidden print:inline">{price(q.totalAdjust)}</span>
 					<input class="print:hidden w-12" type="number" bind:value={q.totalAdjust} />
 				</td>
@@ -264,6 +259,6 @@
 
 <div class="flex flex-wrap justify-center items-center my-4 print:hidden gap-4">
 	<button class="p-3 font-bold text-sky-500 underline" on:click={() => {print()}}>
-		Print
+		{l.print}
 	</button>
 </div>

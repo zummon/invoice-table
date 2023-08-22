@@ -3,6 +3,7 @@
     "": "English",
     "label": {
       "": {
+        "print": "Preview / Print",
         "title": "Invoice",
         "ref": "No",
         "date": "Date",
@@ -71,6 +72,7 @@
     "": "ภาษาไทย",
     "label": {
       "": {
+        "print": "ดูตัวอย่าง / พิมพ์",
         "title": "ใบแจ้งหนี้",
         "ref": "เลขที่",
         "date": "วันที่",
