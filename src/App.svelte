@@ -88,32 +88,32 @@
 </script>
 
 <datalist id="desc-li">
-	{#each data[q.lang].itemsDesc as item, index (`desc-li-${index}`)}
-		<option value={item}>{item}</option>
+	{#each data[q.lang].itemsDesc as str, index (`desc-li-${index}`)}
+		<option value={str}>{str}</option>
 	{/each}
 </datalist>
 <datalist id="unit-li">
-	{#each data[q.lang].itemsUnit as item, index (`unit-li-${index}`)}
-		<option value={item}>{item}</option>
+	{#each data[q.lang].itemsUnit as str, index (`unit-li-${index}`)}
+		<option value={str}>{str}</option>
 	{/each}
 </datalist>
 
 <div class="flex flex-wrap justify-center items-center my-4 print:hidden">
 	<div class="">
-		{#each Object.keys(data) as lng, index (`lang-${index}`)}
-			<button class="p-3 font-bold {q.lang == lng ? "text-indigo-500" : "text-sky-500 underline"}" on:click={() => {
-				q = data[lng].q
+		{#each Object.keys(data) as str, index (`lang-${index}`)}
+			<button class="p-3 font-bold {q.lang == str ? "text-indigo-500" : "text-sky-500 underline"}" on:click={() => {
+				q = data[str].q
 			}}>
-				{data[lng]['']}
+				{data[str]['']}
 			</button>
 		{/each}
 	</div>
 	<div class="">
-		{#each Object.keys(data[q.lang].label) as dc, index (`doc-${index}`)}
-			<button class="p-3 font-bold {q.doc == dc ? "text-indigo-500" : "text-sky-500 underline"}" on:click={() => {
-				q.doc = dc
+		{#each Object.keys(data[q.lang].label) as str, index (`doc-${index}`)}
+			<button class="p-3 font-bold {q.doc == str ? "text-indigo-500" : "text-sky-500 underline"}" on:click={() => {
+				q.doc = str
 			}}>
-				{data[q.lang].label[dc].title}
+				{data[q.lang].label[str].title}
 			</button>
 		{/each}
 	</div>
@@ -191,12 +191,17 @@
 					<td class="border border-black text-right px-2 py-1">{price(q.itemAmount[index])}</td>
 				</tr>
 			{/each}
+			<tr class="print:hidden">
+				<td class="text-center" colspan="6">
+					<button class="text-4xl font-bold text-sky-500 p-2" on:click={addItem}>+</button>
+					<button class="text-4xl font-bold text-sky-500 p-2" on:click={removeItem}>-</button>
+				</td>
+			</tr>
 		</tbody>
 		<tfoot class="">
 			<tr class="">
 				<td class="border-l border-t border-black text-center" colspan="3" rowspan={2}>
-					<button class="text-4xl font-bold text-sky-500 p-2 print:hidden" on:click={addItem}>+</button>
-					<button class="text-4xl font-bold text-sky-500 p-2 print:hidden" on:click={removeItem}>-</button>
+	
 				</td>
 				<td class="border border-black text-center px-2 py-1 font-bold" colspan="2">{l.totalAmount}</td>
 				<td class="border border-black text-right px-2 py-1 font-bold">
