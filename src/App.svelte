@@ -174,7 +174,7 @@
 					<td class="border border-black text-center px-2 py-1" contenteditable="true">{index + 1}</td>
 					<td class="border border-black px-2 py-1" >
 						<span class="hidden print:inline">{q.itemDesc[index]}</span>
-						<input class="print:hidden" type="text" bind:value={q.itemDesc[index]} list="desc-li" />
+						<input class="print:hidden w-full" type="text" bind:value={q.itemDesc[index]} list="desc-li" />
 					</td>
 					<td class="border border-black text-center px-2 py-1">
 						<span class="hidden print:inline">{q.itemUnit[index]}</span>
@@ -184,7 +184,7 @@
 						<span class="hidden print:inline">{qty(q.itemQty[index])}</span>
 						<input class="print:hidden w-12" type="number" bind:value={q.itemQty[index]} />
 					</td>
-					<td class="border border-black text-right px-2 py-1" >
+					<td class="border border-black text-center print:text-right px-2 py-1" >
 						<span class="hidden print:inline">{price(q.itemPrice[index])}</span>
 						<input class="print:hidden w-12" type="number" bind:value={q.itemPrice[index]} />
 					</td>
