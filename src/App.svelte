@@ -159,9 +159,9 @@
 				<th class="border border-black px-2 py-1 relative">
 					<span class="">{l.itemDesc}</span>
 				</th>
-				<th class="border border-black px-2 py-1">{l.itemUnit}</th>
-				<th class="border border-black px-2 py-1">{l.itemQty}</th>
-				<th class="border border-black px-2 py-1">{l.itemPrice}</th>
+				<th class="border border-black px-2 py-1 w-20 print:w-auto">{l.itemUnit}</th>
+				<th class="border border-black px-2 py-1 w-14 print:w-auto">{l.itemQty}</th>
+				<th class="border border-black px-2 py-1 w-24 print:w-auto">{l.itemPrice}</th>
 				<th class="border border-black px-2 py-1">
 					<span class="">{l.itemAmount}</span>
 					(<span class="" contenteditable="true" bind:textContent={q.currency}></span>)
@@ -178,23 +178,23 @@
 					</td>
 					<td class="border border-black text-center px-2 py-1">
 						<span class="hidden print:inline">{q.itemUnit[index]}</span>
-						<input class="print:hidden w-12" type="text" bind:value={q.itemUnit[index]} list="unit-li" />
+						<input class="print:hidden w-full" type="text" bind:value={q.itemUnit[index]} list="unit-li" />
 					</td>
 					<td class="border border-black text-center px-2 py-1" >
 						<span class="hidden print:inline">{qty(q.itemQty[index])}</span>
-						<input class="print:hidden w-12" type="number" bind:value={q.itemQty[index]} />
+						<input class="print:hidden w-full" type="number" bind:value={q.itemQty[index]} />
 					</td>
 					<td class="border border-black text-center print:text-right px-2 py-1" >
 						<span class="hidden print:inline">{price(q.itemPrice[index])}</span>
-						<input class="print:hidden w-12" type="number" bind:value={q.itemPrice[index]} />
+						<input class="print:hidden w-full" type="number" bind:value={q.itemPrice[index]} />
 					</td>
 					<td class="border border-black text-right px-2 py-1">{price(q.itemAmount[index])}</td>
 				</tr>
 			{/each}
 			<tr class="print:hidden">
 				<td class="text-center" colspan="6">
-					<button class="text-4xl font-bold text-sky-500 p-2" on:click={addItem}>+</button>
-					<button class="text-4xl font-bold text-sky-500 p-2" on:click={removeItem}>-</button>
+					<button class="text-2xl underline font-bold text-sky-500 px-6 py-3" on:click={addItem}>{l.add}</button>
+					<button class="text-2xl underline font-bold text-sky-500 px-6 py-3" on:click={removeItem}>{l.delete}</button>
 				</td>
 			</tr>
 		</tbody>
@@ -212,7 +212,7 @@
 				<td class="border border-black text-center px-2 py-1 font-bold" colspan="2">
 					<span class="">{l.totalVat}</span>
 					<span class="hidden print:inline">{rate(q.vatRate)}</span>
-					<input class="print:hidden w-12" type="number" bind:value={q.vatRate} step="0.01" />
+					<input class="print:hidden w-14" type="number" bind:value={q.vatRate} step="0.01" />
 				</td>
 				<td class="border border-black text-right px-2 py-1 font-bold">
 					{price(q.totalVat)}
@@ -224,7 +224,7 @@
 					<td class="border border-black text-center px-2 py-1 font-bold" colspan="2">
 						<span class="">{l.totalWht}</span>
 						<span class="hidden print:inline">{rate(q.whtRate)}</span>
-						<input class="print:hidden w-12" type="number" bind:value={q.whtRate} step="0.01" />
+						<input class="print:hidden w-14" type="number" bind:value={q.whtRate} step="0.01" />
 					</td>
 					<td class="border border-black text-right px-2 py-1 font-bold">
 						{price(q.totalWht)}
@@ -236,7 +236,7 @@
 				<td class="border border-black text-center px-2 py-1 font-bold" colspan="2">{l.totalAdjust}</td>
 				<td class="border border-black text-right px-2 py-1 font-bold" >
 					<span class="hidden print:inline">{price(q.totalAdjust)}</span>
-					<input class="print:hidden w-12" type="number" bind:value={q.totalAdjust} />
+					<input class="print:hidden w-14" type="number" bind:value={q.totalAdjust} />
 				</td>
 			</tr>
 			<tr class="">

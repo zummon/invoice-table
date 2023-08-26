@@ -4,6 +4,8 @@
     "label": {
       "": {
         "print": "Preview / Print",
+        "add": "Add",
+        "delete": "Delete",
         "title": "Invoice",
         "ref": "No",
         "date": "Date",
@@ -73,6 +75,8 @@
     "label": {
       "": {
         "print": "ดูตัวอย่าง / พิมพ์",
+        "add": "เพิ่ม",
+        "delete": "ลบ",
         "title": "ใบแจ้งหนี้",
         "ref": "เลขที่",
         "date": "วันที่",
