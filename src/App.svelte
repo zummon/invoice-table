@@ -101,7 +101,7 @@
 <div class="flex flex-wrap justify-center items-center my-4 print:hidden">
 	<div class="">
 		{#each Object.keys(data) as str, index (`lang-${index}`)}
-			<button class="p-3 font-bold {q.lang == str ? "text-indigo-500" : "text-sky-500 underline"}" on:click={() => {
+			<button class="p-3 font-bold text-lg {q.lang == str ? "text-indigo-500" : "text-sky-500 underline"}" on:click={() => {
 				q = data[str].q
 			}}>
 				{data[str]['']}
@@ -110,7 +110,7 @@
 	</div>
 	<div class="">
 		{#each Object.keys(data[q.lang].label) as str, index (`doc-${index}`)}
-			<button class="p-3 font-bold {q.doc == str ? "text-indigo-500" : "text-sky-500 underline"}" on:click={() => {
+			<button class="p-3 font-bold text-lg {q.doc == str ? "text-indigo-500" : "text-sky-500 underline"}" on:click={() => {
 				q.doc = str
 			}}>
 				{data[q.lang].label[str].title}
@@ -156,9 +156,7 @@
 			</tr>
 			<tr class="text-center">
 				<th class="border border-black px-2 py-1">{l.itemNo}</th>
-				<th class="border border-black px-2 py-1 relative">
-					<span class="">{l.itemDesc}</span>
-				</th>
+				<th class="border border-black px-2 py-1 relative">{l.itemDesc}</th>
 				<th class="border border-black px-2 py-1 w-20 print:w-auto">{l.itemUnit}</th>
 				<th class="border border-black px-2 py-1 w-14 print:w-auto">{l.itemQty}</th>
 				<th class="border border-black px-2 py-1 w-24 print:w-auto">{l.itemPrice}</th>
@@ -193,15 +191,15 @@
 			{/each}
 			<tr class="print:hidden">
 				<td class="text-center" colspan="6">
-					<button class="text-2xl underline font-bold text-sky-500 px-6 py-3" on:click={addItem}>{l.add}</button>
-					<button class="text-2xl underline font-bold text-sky-500 px-6 py-3" on:click={removeItem}>{l.delete}</button>
+					<button class="text-lg underline font-bold text-sky-500 px-6 py-3" on:click={addItem}>{l.add}</button>
+					<button class="text-lg underline font-bold text-sky-500 px-6 py-3" on:click={removeItem}>{l.delete}</button>
 				</td>
 			</tr>
 		</tbody>
 		<tfoot class="">
 			<tr class="">
 				<td class="border-l border-t border-black text-center" colspan="3" rowspan={2}>
-	
+					<span class="">{l.note}</span>: <span class="" contenteditable="true" bind:textContent={q.note}></span>
 				</td>
 				<td class="border border-black text-center px-2 py-1 font-bold" colspan="2">{l.totalAmount}</td>
 				<td class="border border-black text-right px-2 py-1 font-bold">
@@ -263,7 +261,7 @@
 </div>
 
 <div class="flex flex-wrap justify-center items-center my-4 print:hidden gap-4">
-	<button class="p-3 font-bold text-sky-500 underline" on:click={() => {print()}}>
+	<button class="p-3 font-bold text-sky-500 underline text-lg" on:click={() => {print()}}>
 		{l.print}
 	</button>
 </div>
