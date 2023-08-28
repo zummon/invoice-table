@@ -4,6 +4,7 @@
 
 	let l = data[""].label[""];
 	let q = data[""].q;
+	let qs = "";
 
 	const price = (number) => {
 		number = Number(number);
@@ -75,6 +76,23 @@
 			q.date = new Date().toJSON().slice(0, 10);
 		}
 	});
+
+	$: {
+		let str = "?";
+		Object.keys(q).forEach((key) => {
+			const values = q[key];
+			if (values) {
+				if (Array.isArray(values)) {
+					values.forEach((value) => {
+						str += `${key}=${value}&`;
+					});
+					return;
+				}
+				str += `${key}=${values}&`;
+			}
+		});
+		qs = str;
+	}
 
 	$: l = {
 		...data[q.lang].label[""],
@@ -388,6 +406,9 @@
 </div>
 
 <div class="flex flex-wrap justify-center items-center my-4 print:hidden gap-4">
+	<a class="p-3 font-bold text-sky-500 underline text-lg" href={qs}>
+		{l.save}
+	</a>
 	<button
 		class="p-3 font-bold text-sky-500 underline text-lg"
 		on:click={() => {
@@ -396,4 +417,7 @@
 	>
 		{l.print}
 	</button>
+	<a class="p-3 font-bold text-sky-500 underline text-lg" href="./">
+		{l.reset}
+	</a>
 </div>

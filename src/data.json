@@ -3,6 +3,8 @@
 		"": "English",
 		"label": {
 			"": {
+				"reset": "Reset",
+				"save": "Save",
 				"print": "Preview / Print",
 				"add": "Add",
 				"delete": "Delete",
@@ -74,6 +76,8 @@
 		"": "ภาษาไทย",
 		"label": {
 			"": {
+				"reset": "ล้าง",
+				"save": "บันทึก",
 				"print": "ดูตัวอย่าง / พิมพ์",
 				"add": "เพิ่ม",
 				"delete": "ลบ",
