@@ -373,7 +373,7 @@
 				<td class="border border-black text-right px-2 py-1 font-bold">
 					<span class="hidden print:inline">{price(q.totalAdjust)}</span>
 					<input
-						class="print:hidden w-full"
+						class="print:hidden w-full text-right"
 						type="number"
 						bind:value={q.totalAdjust}
 					/>
@@ -417,7 +417,10 @@
 	>
 		{l.print}
 	</button>
-	<a class="p-3 font-bold text-sky-500 underline text-lg" href="./">
+	<a
+		class="p-3 font-bold text-sky-500 underline text-lg"
+		href="/?lang={q.lang}&doc={q.doc}"
+	>
 		{l.reset}
 	</a>
 </div>
